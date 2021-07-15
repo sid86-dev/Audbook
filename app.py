@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, send_file, abort
+from flask import Flask, render_template, request, send_file, abort
 from werkzeug.utils import secure_filename
 from os import walk
 import pyttsx3
