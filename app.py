@@ -41,7 +41,7 @@ def extraction():
         c = b[0]
         filename_read = c + ".pdf"
         filename_audio = c 
-        app.config['GET_FOLDER'] = f"C:\\SID PROGRAMMER\\Audbook\\static\\pdfs\\{filename_read}"
+        app.config['GET_FOLDER'] = f"\\static\\pdfs\\{filename_read}"
         loc = app.config['GET_FOLDER']
         read = PyPDF2.PdfFileReader(loc)
 
@@ -63,8 +63,8 @@ def extraction():
 
         print(realanyzed_text)
         # save as audio
-        app.config['DOWNLOAD_FOLDER'] = f"C:\\SID PROGRAMMER\\Audbook\\static\\Audio\\{filename_audio}.mp3"
-        app.config['AUDIO_FOLDER'] = f"C:\\SID PROGRAMMER\\Audbook\\static\\Audio\\{filename_audio}.mp3"
+        app.config['DOWNLOAD_FOLDER'] = f"\\static\\Audio\\{filename_audio}.mp3"
+        app.config['AUDIO_FOLDER'] = f"\\static\\Audio\\{filename_audio}.mp3"
         language = 'en'
         speaker = gTTS(text=realanyzed_text, lang=language, slow=False)
         speaker.save(app.config['AUDIO_FOLDER'])
@@ -80,4 +80,4 @@ def download():
     except FileNotFoundError:
         abort(404)
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run()
