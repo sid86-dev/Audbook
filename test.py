@@ -7,7 +7,7 @@ from gtts import gTTS
 import os
 
 # The text that you want to convert to audio
-mytext = 'My friend samyak is so black. He is kala samosa ! AAh! fuck sanchayan'
+mytext = 'Your system has been hacked. Your system has been hacked. Your system has been hacked. Virus activated, Virus activated, Virus activated, Sukunto ghosh pade thos thos . Maa matir manush'
 
 # Language in which you want to convert
 language = 'en'
