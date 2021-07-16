@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_file, abort
 from werkzeug.utils import secure_filename
 from os import walk
-import pyttsx3
+from gtts import gTTS
 import PyPDF2
 
 import os
@@ -15,21 +15,22 @@ app.config['UPLOAD_FOLDER'] = params['upload_location']
 
 @app.route("/")
 def index():
-    dir = "static/pdfs"
-    for f in os.listdir(dir):
-        os.remove(os.path.join(dir, f))
-    dir = "static/Audio"
-    for f in os.listdir(dir):
-        os.remove(os.path.join(dir, f))
     return render_template('index.html')
 
 
 
 @app.route("/extraction", methods=["GET", "POST"])
 def extraction():
-    if request.method == "POST":
+    dir = "static/pdfs"
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
+    dir = "static/Audio"
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
 
         # saving file
+
+    if request.method == "POST":
         f = request.files['file1']
         f.save(os.path.join(
         app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
@@ -64,13 +65,11 @@ def extraction():
         # save as audio
         app.config['DOWNLOAD_FOLDER'] = f"C:\\SID PROGRAMMER\\Audbook\\static\\Audio\\{filename_audio}.mp3"
         app.config['AUDIO_FOLDER'] = f"C:\\SID PROGRAMMER\\Audbook\\static\\Audio\\{filename_audio}.mp3"
-        speaker = pyttsx3.init()
-        newVoiceRate = 125
-        speaker.setProperty('rate',newVoiceRate)
-        speaker.save_to_file(realanyzed_text, app.config['AUDIO_FOLDER'])
+        language = 'en'
+        speaker = gTTS(text=realanyzed_text, lang=language, slow=False)
+        speaker.save(app.config['AUDIO_FOLDER'])
         loc = f"\static\Audio\{filename_audio}.mp3"
         print(loc)
-        speaker.runAndWait()
     return render_template('extraction.html', output1=realanyzed_text, audio=loc)
 
     
